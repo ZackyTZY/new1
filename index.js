@@ -84,6 +84,20 @@ const tebakkimia = db.data.game.tebakkimia = []
 const tebaklirik = db.data.game.tebaklirik = []
 const tebaktebakan = db.data.game.tebaktebakan = []
 
+//punya gw, Sticker Image
+heker1 = "https://telegra.ph/file/6e93488bdd86d4193daf6.jpg"
+heker2 = "https://telegra.ph/file/81b9635450fc4a0068541.jpg"
+heker3 = "https://telegra.ph/file/dbc3d3e9e7f31a9d42556.jpg"
+heker4 = "https://telegra.ph/file/a9a7a9702db222f61641a.jpg"
+heker5 = "https://telegra.ph/file/8a066e8731fd52963f91b.png"
+heker6 = "https://telegra.ph/file/ab28f93b4fd00540cc548.png"
+var HekerList = [heker1,heker2,heker3,heker4,heker5,heker6]
+var heker = HekerList[Math.floor(Math.random() * HekerList.length)];
+
+// Sticker Video
+hekel1 = "https://telegra.ph/file/ff46319058dd5ebabc89a.mp4"
+var HekerListMP4 = [hekel1]
+var hengker = HekerListMP4[Math.floor(Math.random() * HekerListMP4.length)];
 
 module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
     try {
@@ -204,6 +218,12 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
 		}
 		const sendReact = async (emoji) => { //await sendReact("📋")
             return alpha.sendMessage(m.chat, { react: { text: emoji, key: m.key }})
+		}
+		const sendSticker = async (file) => {
+		    return alpha.sendImageAsSticker(m.chat, file, m, { packname: global.packname, author: global.author })
+		}
+		const sendStickerVideo = async (file) => {
+		    return alpha.sendVideoAsSticker(m.chat, file, m, { packname: global.packname, author: global.author })
 		}
 		const randomArr = (arr = []) => {
             return arr[Math.floor(Math.random() * arr.length)]
@@ -336,29 +356,34 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
      }
 		
 		// Anti Virus \\
-		if (m.isGroup && !m.key.fromMe && db.data.chats[m.chat].antivirus && !isCreator && !isGroupAdmins && !isGroupOwner){		    	    
-	    if (budy.match(/(๒|๑|৭|ด|ผ|ท|ง|า|ۿ|๕|๘|٩|๓|๗|๙|৫|ꫂ|闦|ᡃ⃟⃟|i⃟|ᡃ⃢⃢|ᡃ⃝|⃢⃝⃟⃕⃕|ℨ|᠀|📄|ı|ạ|ẉ|k̴̎|ɑ|ℰ|ℛ|Ø|✘|█|▒|❚|𝀲|ࣧ|ࣻ|ۜ|ࣨ|ۧ|҈|᳕|᥋|২|อ|เ|ม|ล|ꭙ|Ȣ|৪|໑|๗|𖣔|ꪶ|ꫂ|࿋|ℭ|ム|ℕ|⫷|●|⫸|ཌྷ|្|0000000|1111111|7777777|8888888|9999999)/gi)) {
-        	reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res =>
+	  if (m.isGroup && !m.key.fromMe && db.data.chats[m.chat].antivirus && !isCreator && !isGroupAdmins && !isGroupOwner){		    	    
+	    if (budy.match(/(๒|๑|৭|ด|ผ|ท|ง|า|ۿ|๕|๘|٩|๓|๗|๙|৫|ꫂ|闦|ᡃ⃟⃟|i⃟|ᡃ⃢⃢|ᡃ⃝|⃢⃝⃟⃕⃕|ℨ|᠀|📄|ı|ạ|ẉ|k̴̎|ɑ|ℰ|ℛ|Ø|✘|█|▒|❚|𝀲|ࣧ|ࣻ|ۜ|ࣨ|ۧ|҈|᳕|᥋|২|อ|เ|ม|ล|ꭙ|Ȣ|৪|໑|๗|𖣔|࿋|ℭ|ム|ℕ|⫷|●|⫸|ཌྷ|្|ϟ|➊|㙾|㚗|0000000|1111111|7777777|8888888|9999999)/gi)) { // ꪶ, ꫂ
+        	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	//alpha.sendMessage(m.chat, { sticker: fs.readFileSync("./storage/sticker/heker.webp") }, { quoted: m })
+        	sendSticker(heker).then(async res =>
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
 	    } else if (m.mtype === 'productMessage') {
-        	reply(`「 *SLAYER TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	//reply(`「 *SLAYER TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
 	    } else if (m.mtype === 'orderMessage') {
-        	reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	//reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
-		} else if (m.mtype === 'locationMessage') {
+		/*} else if (m.mtype === 'locationMessage') { // Lokasi biasa, rekomendasi off
         	reply(`「 *VIRLOK TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
-			alpha.updateBlockStatus(sender, 'block')
+			alpha.updateBlockStatus(sender, 'block')*/
 		/*} else if (m.mtype === 'liveLocationMessage') {
-        	reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	reply(`「 *VIRLOK TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
 		} else if (m.mtype === 'documentMessage') {
-        	reply(`「 *VIRDOC TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	//reply(`「 *VIRDOC TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
 		/*} else if (m.mtype === 'audioMessage') {
@@ -378,7 +403,8 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
 	    } else if (budy.length > 1000) {
-        	reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	sendSticker(heker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
         }
@@ -391,6 +417,12 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         	await alpha.updateBlockStatus(sender, 'block'))
         }
      }
+     
+        // Tes \\
+        /*if (budy.match(/(te?s)/gi)) {
+        	//reply(`「 *TES* 」\n\nSuccses`)
+        	sendStickerVideo(hengker)
+        }*/
 
 //━━━━━━━━━━━━━━━━━━━━━━[ Voice ]━━━━━━━━━━━━━━━━━━━━━━━━━━//punya gw							
 				
@@ -1084,7 +1116,7 @@ if (!m.isGroup) return reply(lang.groupOnly())
 				})
             }
             break
-            case 'ping': case 'tes': case 'runtime':
+            case 'ping': case 'runtime':
             await sendReact("⏳")
             reply(`Runtime : ${runtime(process.uptime())}`)
             break
