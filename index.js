@@ -421,7 +421,8 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         // Tes \\
         /*if (budy.match(/(te?s)/gi)) {
         	//reply(`「 *TES* 」\n\nSuccses`)
-        	sendStickerVideo(hengker)
+        	//sendStickerVideo(hengker)
+        	alpha.sendMessage(m.chat, { sticker: { url: "https://telegra.ph/file/25d567b38e5a8a1d8d573.png" }, contextInfo:{ externalAdReply: { showAdAttribution: true, title: `Selamat ${salam} ${pushname}`, body: `${ownername}`, previewType: "PHOTO", thumbnailUrl: ``, thumbnail: pp_bot, sourceUrl: `${myweb}`}}}, { quoted })
         }*/
 
 //━━━━━━━━━━━━━━━━━━━━━━[ Voice ]━━━━━━━━━━━━━━━━━━━━━━━━━━//punya gw							
@@ -1039,7 +1040,7 @@ if (!m.isGroup) return reply(lang.groupOnly())
                     fs.unlinkSync(media)
                     if (err) return reply(lang.ToimgErr())
                     let buffer = fs.readFileSync(ran)
-                    alpha.sendMessage(m.chat, { image: buffer, caption: 'Nih Tod' }, { quoted: m })
+                    alpha.sendMessage(m.chat, { image: buffer, caption: 'Nih Tod', contextInfo:{ externalAdReply: { showAdAttribution: true, title: `🆂🆃🅸🅲🅺🅴🆁 🅣🅞 🄸🄼🄰🄶🄴`, body: `${ownername}`, previewType: "PHOTO", thumbnailUrl: ppuser, thumbnail: '', sourceUrl: `${myweb}`}}}, { quoted: m })
                     fs.unlinkSync(ran)
                 })
             }
