@@ -1032,8 +1032,7 @@ if (!m.isGroup) return reply(lang.groupOnly())
             break
 	    case 'toimage': case 'toimg': { //punya gw
                 if (!quoted) return reply(lang.NoToImg())
-                if (!/webp/.test(mime)) return reply(lang.NoToImg())
-                reply(lang.wait())
+                if (!/webp/.test(mime)) return reply(lang.NoToImg())                
                 let media = await alpha.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -4403,6 +4402,11 @@ gak share gak bisa masuk🙏`
  await alpha.groupParticipantsUpdate(idgc, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
  }
  break
+
+case 'jadivirgam': //ga work
+virgam = fs.readFileSync('./image/gamvir.jpeg')
+alpha.sendMessage(from, { caption: "nih", image: fs.readFileSync("./image/gamvir.jpeg") }, { quoted: m, thumbnail: virgam })
+break
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[ BATASAN ]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━//punya gw        
 
