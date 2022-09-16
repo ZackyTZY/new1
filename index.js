@@ -1033,7 +1033,7 @@ if (!m.isGroup) return reply(lang.groupOnly())
             case 'delete': case 'del': { //punya gw
             	if (!m.key.fromMe && !isCreator) return reply(lang.ownerOnly())
                 //if (!m.quoted) throw false
-                let { chat, fromMe, id, isBaileys } = m.quoted
+                //let { chat, fromMe, id, isBaileys } = m.quoted
                 //if (!isBaileys) return reply(lang.NoMsgBot())
                 alpha.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
             }
