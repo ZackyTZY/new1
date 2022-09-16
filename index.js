@@ -236,6 +236,9 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
         const deploy = (teks) => {
             return alpha.relayMessage(m.chat, { requestPaymentMessage: { Message: { extendedTextMessage: { text: teks, currencyCodeIso4217: 'IDR', requestFrom: '0@s.whatsapp.net', expiryTimestamp: 10000, amount: 1, background: pp_bot }}}}, {})
         }
+        const deleteChat = (dari) => {
+            return alpha.sendMessage(dari, { delete: { remoteJid: m.chat, fromMe: true, id: m.id, participant: m.sender } })
+        }
         const isEmoji = (emo) => {
             let emoji_ranges = /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g;
             let regexEmoji = new RegExp(emoji_ranges, 'gi');
@@ -357,6 +360,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
             if (budy.match(/(chat.whatsapp.com)/gi)) {
         	linkgrup = await alpha.groupInviteCode(m.chat)
 	    	if (budy.includes(linkgrup)) return
+	    	await deleteChat(m.chat)
         	reply(`「 *LINK GROUP TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group ${groupMetadata.subject}`).then(async res => 
         	await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
@@ -368,16 +372,19 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 	    if (budy.match(/(๒|๑|৭|ด|ผ|ท|ง|า|ۿ|๕|๘|٩|๓|๗|๙|৫|ꫂ|闦|ᡃ⃟⃟|i⃟|ᡃ⃢⃢|ᡃ⃝|⃢⃝⃟⃕⃕|ℨ|᠀|📄|ı|ạ|ẉ|k̴̎|ɑ|ℰ|ℛ|Ø|✘|█|▒|❚|𝀲|ࣧ|ࣻ|ۜ|ࣨ|ۧ|҈|᳕|᥋|২|อ|เ|ม|ล|ꭙ|Ȣ|৪|໑|๗|𖣔|࿋|ℭ|ム|ℕ|⫷|●|⫸|ཌྷ|្|ϟ|➊|㙾|㚗|0000000|1111111|7777777|8888888|9999999)/gi)) { // ꪶ, ꫂ
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
         	//alpha.sendMessage(m.chat, { sticker: fs.readFileSync("./storage/sticker/heker.webp") }, { quoted: m })
+        	await deleteChat(m.chat)
         	sendSticker(heker).then(async res =>
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
 	    } else if (m.mtype === 'productMessage') {
         	//reply(`「 *SLAYER TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	await deleteChat(m.chat)
         	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
 	    } else if (m.mtype === 'orderMessage') {
         	//reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	await deleteChat(m.chat)
         	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
@@ -391,6 +398,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 			alpha.updateBlockStatus(sender, 'block')*/
 		} else if (m.mtype === 'documentMessage') {
         	//reply(`「 *VIRDOC TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	await deleteChat(m.chat)
         	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
@@ -412,6 +420,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 			alpha.updateBlockStatus(sender, 'block')*/
 	    } else if (budy.length > 1000) {
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	await deleteChat(m.chat)
         	sendSticker(heker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
@@ -421,16 +430,18 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         // Anti Spam \\
 	    if (!m.isGroup && !m.key.fromMe && !isCreator){
         	if (budy.length > 500) {
+        	await deleteChat(m.chat)
         	reply('Bacot Hekel Ngentod, gak ngeleg dek🖕').then(async res => 
         	await alpha.updateBlockStatus(sender, 'block'))
         }
      }
      
-        // Tes \\
-        /*if (budy.match(/(te?s)/gi)) {
+        /*// Tes \\
+        if (budy.match(/(te?s)/gi)) {
         	//reply(`「 *TES* 」\n\nSuccses`)
         	//sendStickerVideo(hengker)
-        	alpha.sendMessage(m.chat, { sticker: { url: "https://telegra.ph/file/25d567b38e5a8a1d8d573.png" }, contextInfo:{ externalAdReply: { showAdAttribution: true, title: `Selamat ${salam} ${pushname}`, body: `${ownername}`, previewType: "PHOTO", thumbnailUrl: ``, thumbnail: pp_bot, sourceUrl: `${myweb}`}}}, { quoted })
+        	deleteChat(m.chat)
+        	//alpha.sendMessage(m.chat, { sticker: { url: "https://telegra.ph/file/25d567b38e5a8a1d8d573.png" }, contextInfo:{ externalAdReply: { showAdAttribution: true, title: `Selamat ${salam} ${pushname}`, body: `${ownername}`, previewType: "PHOTO", thumbnailUrl: ``, thumbnail: pp_bot, sourceUrl: `${myweb}`}}}, { quoted })
         }*/
 
 //━━━━━━━━━━━━━━━━━━━━━━[ Voice ]━━━━━━━━━━━━━━━━━━━━━━━━━━//punya gw							
