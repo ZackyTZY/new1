@@ -135,6 +135,8 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
         const isCreator = isCreatod || m.key.fromMe
         const isGroupAdmen = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = isGroupAdmen || isCreator
+        const isGausah = ['6281316408830@s.whatsapp.net', '6281316407846@s.whatsapp.net']
+        const isKecuali = isGausah.includes(sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur
 
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
@@ -1613,10 +1615,11 @@ break
 				reply(lang.ok())
 				}
 				break
-            case 'kick': {
+            case 'kick': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())
+                if (isKecuali) return (`Mending lu nguli aja sunda ngentod`)
+                if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.MauKick())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 				await alpha.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
@@ -1640,10 +1643,11 @@ break
 				await alpha.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 				}
 				break
-			case 'demote': {
+			case 'demote': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())
+                if (isKecuali) return (`Mending lu nguli aja sunda ngentod`)
+                if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.NakDm())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 				await alpha.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
@@ -4301,8 +4305,8 @@ gak share gak bisa masuk🙏`
         alpha.sendMessage(from, { text: teks2, contextInfo: { forwardingScore: 1000, isForwarded: true, externalAdReply: { title: `${loro}`, thumbnail: fake, mediaType: 2, previewType: "PHOTO", body: `${ownername}`, sourceUrl: `${siji}` }}})
         break
 
-            case 'on':
-                if (!isCreator) return
+            case 'on':            
+                if (!isCreator) return reply('nope')
                 if (!q) return reply(`*contoh* : ${prefix + command} autoread\n\n*Isi Daftar :*\n•autoread\n•autoketik\n•autorecording\n•available\n•unavailable\n•pause\n•autovoice\n•autobio`)
                 if (args[0] === 'autoread') {
                     global.autoread = true
@@ -4380,9 +4384,9 @@ gak share gak bisa masuk🙏`
 
  case 'add2': {
  if (!isCreator) return reply(lang.ownerOnly())
- if (!q) return reply(`contoh : ${prefix + command} +628xx|"120363024710399996@g.us"`)
+ if (!q) return reply(`Contoh : ${prefix + command} +628xx|120363024710399996@g.us`)
  anu = args.join(' ').split('|')
- nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-7846"
+ nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-8830"
  idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
  let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
  await alpha.groupParticipantsUpdate(idgc, [users], 'add').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
@@ -4391,9 +4395,9 @@ gak share gak bisa masuk🙏`
 
  case 'kick2': {
  if (!isCreator) return reply(lang.ownerOnly())
- if (!q) return reply(`contoh : ${prefix + command} +628xx|"120363024710399996@g.us"`)
+ if (!q) return reply(`contoh : ${prefix + command} +628xx|120363024710399996@g.us`)
  anu = args.join(' ').split('|')
- nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-7846"
+ nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-8830"
  idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
  let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
  await alpha.groupParticipantsUpdate(idgc, [users], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
@@ -4402,9 +4406,9 @@ gak share gak bisa masuk🙏`
 
  case 'promote2': { // > alpha.groupParticipantsUpdate("120363024710399996@g.us", ['62852364835040@s.whatsapp.net'], 'promote')
  if (!isCreator) return reply(lang.ownerOnly())
- if (!q) return reply(`contoh : ${prefix + command} +628xx|"120363024710399996@g.us"`)
+ if (!q) return reply(`contoh : ${prefix + command} +628xx|120363024710399996@g.us`)
  anu = args.join(' ').split('|')
- nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-7846"
+ nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-8830"
  idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
  let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
  await alpha.groupParticipantsUpdate(idgc, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
@@ -4413,9 +4417,9 @@ gak share gak bisa masuk🙏`
 
  case 'demote2': {
  if (!isCreator) return reply(lang.ownerOnly())
- if (!q) return reply(`contoh : ${prefix + command} +628xx|"120363024710399996@g.us"`)
+ if (!q) return reply(`contoh : ${prefix + command} +628xx|120363024710399996@g.us`)
  anu = args.join(' ').split('|')
- nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-7846"
+ nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-8830"
  idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
  let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
  await alpha.groupParticipantsUpdate(idgc, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
