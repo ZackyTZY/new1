@@ -431,8 +431,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 	    if (!m.isGroup && !m.key.fromMe && !isCreator){
         	if (budy.length > 500) {        	
         	reply('Bacot Hekel Ngentod, gak ngeleg dek🖕').then(async res => 
-        	await alpha.updateBlockStatus(sender, 'block'))
-        	deleteChat(m.chat)
+        	await alpha.updateBlockStatus(sender, 'block'))        	
         }
      }
      
