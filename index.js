@@ -135,8 +135,7 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
         const isCreator = isCreatod || m.key.fromMe
         const isGroupAdmen = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = isGroupAdmen || isCreator
-        const isGausah = ['6281316408830@s.whatsapp.net', '6281316407846@s.whatsapp.net']
-        const isKecuali = isGausah.includes(sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur
+        const isKecuali = ['6281316408830','6281316407846'].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur       
 
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
@@ -1663,8 +1662,8 @@ break
             case 'out': case 'leave': //punya gw
                 if (!m.isGroup) return reply(lang.groupOnly())
                 if (!m.key.fromMe && !isCreator) return reply(lang.ownerOnly())
-               reply('Sayonara~ 👋').then(async res => 
-               await alpha.groupLeave(from))
+                reply('Sayonara~ 👋').then(async res => 
+                await alpha.groupLeave(from))
             break
             case 'group': case 'grup':
                 if (!m.isGroup) return reply(lang.groupOnly())
@@ -4306,7 +4305,7 @@ gak share gak bisa masuk🙏`
         break
 
             case 'on':            
-                if (!isCreator) return reply('nope')
+                if (!isCreator) return //reply('nope')
                 if (!q) return reply(`*contoh* : ${prefix + command} autoread\n\n*Isi Daftar :*\n•autoread\n•autoketik\n•autorecording\n•available\n•unavailable\n•pause\n•autovoice\n•autobio`)
                 if (args[0] === 'autoread') {
                     global.autoread = true
