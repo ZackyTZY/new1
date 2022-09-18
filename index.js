@@ -419,7 +419,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
-	    } else if (budy.length > 1000) {
+	    } else if (budy.length > 2000) {
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)        	
         	sendSticker(heker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))			
@@ -429,7 +429,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
      
         // Anti Spam \\
 	    if (!m.isGroup && !m.key.fromMe && !isCreator){
-        	if (budy.length > 500) {        	
+        	if (budy.length > 1500) {        	
         	reply('Bacot Hekel Ngentod, gak ngeleg dek🖕').then(async res => 
         	await alpha.updateBlockStatus(sender, 'block'))        	
         }
