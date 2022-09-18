@@ -419,6 +419,12 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         	reply(`「 *VIRWEB TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
+		} else if (m.mtype === 'conversation') { // Pesan Bot / Bug Bot
+        	//reply(`「 *BUG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	await deleteChat(m.chat)
+        	sendStickerVideo(hengker).then(async res => 
+			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
+			alpha.updateBlockStatus(sender, 'block')
 	    } else if (budy.length > 1000) {
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
         	await deleteChat(m.chat)
