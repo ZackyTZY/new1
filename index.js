@@ -135,7 +135,7 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
         const isCreator = isCreatod || m.key.fromMe
         const isGroupAdmen = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = isGroupAdmen || isCreator
-        const isKecuali = ['6281316408830','6281316407846'].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur       
+        const isKecuali = ['6281316408830','6281316407846','6287878230953'].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur       
 
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
