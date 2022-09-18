@@ -1615,7 +1615,7 @@ break
             case 'kick': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                if (isKecuali) return (`Mending lu nguli aja sunda ngentod`)
+                if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
                 if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.MauKick())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -1643,7 +1643,7 @@ break
 			case 'demote': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                if (isKecuali) return (`Mending lu nguli aja sunda ngentod`)
+                if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
                 if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.NakDm())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
