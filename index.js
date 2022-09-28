@@ -135,7 +135,7 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
         const isCreator = isCreatod || m.key.fromMe
         const isGroupAdmen = m.isGroup ? groupAdmins.includes(m.sender) : false
         const isGroupAdmins = isGroupAdmen || isCreator
-        //const isKecuali = ['6281316408830','6281316407846','6287878230953'].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur       
+        const isKecuali = ['6281316408830','6281316407846','6287878230953'].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) // if (isKecuali) return (`Mending lu nguli aja sunda ngentod`) biar orangnya gabisa make fitur       
 
         const groupOwner = m.isGroup ? groupMetadata.owner : ''
         const isGroupOwner = m.isGroup ? (groupOwner ? groupOwner : groupAdmins).includes(m.sender) : false
@@ -419,7 +419,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         	sendStickerVideo(hengker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
-	    } else if (budy.length > 2000) {
+	    } else if (budy.length > 1500) {
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)        	
         	sendSticker(heker).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))			
@@ -429,7 +429,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
      
         // Anti Spam \\
 	    if (!m.isGroup && !m.key.fromMe && !isCreator){
-        	if (budy.length > 1500) {        	
+        	if (budy.length > 800) {        	
         	reply('Bacot Hekel Ngentod, gak ngeleg dek🖕').then(async res => 
         	await alpha.updateBlockStatus(sender, 'block'))        	
         }
@@ -1615,7 +1615,7 @@ break
             case 'kick': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                //if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
+                if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
                 if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.MauKick())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -1643,7 +1643,7 @@ break
 			case 'demote': { //punya gw
 				if (!m.isGroup) return reply(lang.groupOnly())
                 if (!isBotAdmins) return reply(lang.botNotAdmin())
-                //if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
+                if (isKecuali) return reply(`Mending lu nguli aja sunda ngentod`)
                 if (!(isGroupAdmins || isGroupOwner )) return reply(lang.adminOnly())                
                 if (!m.quoted && !text) return reply(lang.NakDm())
 				let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
