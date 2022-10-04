@@ -503,24 +503,28 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 //━━━━━━━━━━━━━━━━━━━━━━[ Setting ]━━━━━━━━━━━━━━━━━━━━━━━━━━//
   
         //punya gw
-        if (autoread){
+        if (autoread) {
            alpha.sendReadReceipt(m.chat, m.sender, [m.key.id])
         }        
-        if (autoketik){
+        if (autoketik) {
            await alpha.sendPresenceUpdate('composing', m.chat)
         }
-        if (autorecording){
+        if (autorecording) {
            await alpha.sendPresenceUpdate('recording', m.chat)
         }        
-        if (available){
+        if (available) {
            await alpha.sendPresenceUpdate('available', m.chat)
         }        
-        if (unavailable){
+        if (unavailable) {
            await alpha.sendPresenceUpdate('unavailable', m.chat)
         }        
-        if (pause){
+        if (pause) {
            await alpha.sendPresenceUpdate('pause', m.chat)
         }
+        if (autoreadsw) {
+		if (from === 'status@broadcast') {
+		   await alpha.chatRead(from)
+	    }}
 
         // Auto Bio \\
     	if (isCmd && autobio) {

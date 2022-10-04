@@ -21,6 +21,7 @@ global.unavailable = false //status offline (offline)
 global.pause = false //YNTKTS
 global.autovoice = false //prank autovoice (auto voice pas ada yg toxic) //punya gw
 global.autobio = false //auto set bio (kalau ada orang yg komen)
+global.autoreadsw = true //auto read SW (story WhatsApp)
 
 //language
 //Available in indonesia & english
