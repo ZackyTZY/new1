@@ -523,8 +523,9 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         }
         if (autoreadsw) {
 		if (from === 'status@broadcast') {
-		   await alpha.chatRead(from)
-	    }}
+		   alpha.chatRead(from)
+	    }
+	    }
 
         // Auto Bio \\
     	if (isCmd && autobio) {
