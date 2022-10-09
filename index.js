@@ -523,9 +523,8 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         }
         if (autoreadsw) {
 		if (from === 'status@broadcast') {
-		   alpha.chatRead(from)
-	    }
-	    }
+		   await alpha.chatRead(from)
+	    }}
 
         // Auto Bio \\
     	if (isCmd && autobio) {
@@ -825,7 +824,7 @@ db.data.absen[from] = [
   }
 break
         	//Database
-case 'setcmd': {
+case 'setcmd': case 'addcmd': {
 db.data.cmd = db.data.cmd || {}
 if (!m.quoted)return reply(lang.SetCmd(prefix, command))
 if (!m.quoted.fileSha256)return reply(lang.HashCmd())
@@ -4425,6 +4424,17 @@ gak share gak bisa masuk🙏`
  idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
  let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
  await alpha.groupParticipantsUpdate(idgc, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+ }
+ break
+
+ case 'antilink2': {
+ if (!isCreator) return reply(lang.ownerOnly())
+ if (!q) return reply(`Contoh : ${prefix + command} +628xx|120363024710399996@g.us`)
+ anu = args.join(' ').split('|')
+ nomornye = anu[0] !== '' ? anu[0] : "+62 813-1640-8830"
+ idgc = typeof anu[1] !== 'undefined' ? anu[1] : "62895322265316-1614343889@g.us"
+ let users = m.quoted ? m.quoted.sender : nomornye.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+ await alpha.groupParticipantsUpdate(idgc, [users], 'add').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
  }
  break
 
